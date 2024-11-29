@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    image: php:8.2-rc-fpm
+    container_name: csv-file-parser-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: csv-file-parser-nginx
+    restart: always
+    ports:
+      - 8989:80
+    volumes:
+      - ./:/var/www
+      - ./nginx:/etc/nginx/conf.d
